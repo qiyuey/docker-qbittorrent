@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv bash
 
-# permissions
+# permissions
 chown -R abc:abc \
     /config \
-    /downloads
+    /downloads \
+    /cert
