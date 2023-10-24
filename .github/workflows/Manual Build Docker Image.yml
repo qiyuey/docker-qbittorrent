@@ -2,6 +2,9 @@ name: Manual Build Docker Image
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - './ReleaseTag'
 
 jobs:
   buildx:
@@ -30,9 +33,9 @@ jobs:
       - name: Set Version
         id: set-version
         run: |
-          echo "::set-output name=version::$(cat ReleaseTag | head -n1)"
+          echo "version=$(cat ReleaseTag | head -n1)" >> $GITHUB_OUTPUT
           echo "ReleaseTag=$(cat ReleaseTag | head -n1)" 
-          echo "::set-output name=status::success"
+          echo "status=success" >> $GITHUB_OUTPUT
 
       # Build and push
       - name: Build and push
@@ -40,8 +43,8 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            superng6/qbittorrent:${{ steps.set-version.outputs.version }}
-            superng6/qbittorrent:latest
+            qiyuey/qbittorrent:${{ steps.set-version.outputs.version }}
+            qiyuey/qbittorrent:latest

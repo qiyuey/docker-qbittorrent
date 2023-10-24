@@ -1,6 +1,6 @@
 #!/bin/bash
 
 docker build \
-  --tag superng6/qbittorrent:latest \
+  --tag qiyuey/qbittorrent:latest \
   --force-rm \
     .

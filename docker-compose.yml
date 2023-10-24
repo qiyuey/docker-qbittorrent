@@ -1,18 +1,18 @@
-version: "2"
 services:
-  aria2:
-    image: superng6/qbittorrent
+  qbittorrent:
+    image: qiyuey/qbittorrent
     container_name: qbittorrent
     environment:
-      - PUID=1026
+      - PUID=1000
       - PGID=100
       - TZ=Asia/Shanghai
       - UT=true
     volumes:
-      - /path/to/appdata/config:/config
-      - /path/to/downloads:/downloads
+      - /share/Public/Docker/qbittorrent:/config
+      - /share/Public/Download:/downloads
+      - /share/Public/Tech:/cert
     ports:
       - 6881:6881
       - 6881:6881/udp
-      - 8080:8080
+      - 6363:6363
     restart: unless-stopped

@@ -1,5 +1,5 @@
-FROM superng6/alpine:3.21 AS builder
-LABEL maintainer="SuperNG6"
+FROM lsiobase/alpine:3.17-69ac1933-ls26 AS builder
+LABEL maintainer="qiyuey"
 
 WORKDIR /qbittorrent
 
@@ -15,8 +15,8 @@ FROM superng6/alpine:3.21
 
 # environment settings
 ENV TZ=Asia/Shanghai \
-    WEBUI_PORT=8080 \
-    PUID=1026 PGID=100 UMASK_SET=022\
+    WEBUI_PORT=6363 \
+    PUID=1000 PGID=100 UMASK_SET=022\
     TL=https://githubraw.sleele.workers.dev/XIU2/TrackersListCollection/master/best.txt \
     UT=true
 
@@ -30,5 +30,5 @@ RUN  apk add --no-cache python3 \
 &&   chmod a+x  /usr/local/bin/qbittorrent-nox  
 
 # ports and volumes
-VOLUME /downloads /config
-EXPOSE 8080  6881  6881/udp
+VOLUME /downloads /config /cert
+EXPOSE 6363  6881  6881/udp
